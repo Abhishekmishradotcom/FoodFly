@@ -38,7 +38,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['your-app-name.onrender.com']
+# ALLOWED_HOSTS = ['.onrender.com']
 
 
 # Application definition
