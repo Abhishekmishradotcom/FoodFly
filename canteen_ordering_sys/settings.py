@@ -11,7 +11,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
 
+
+cloudinary.config(
+    cloud_name = "de1f1bgj8",
+    api_key = "719414213275972",
+    api_secret = "nbhTijstkgw9xaGjr2mpB7SA2cg",
+    secure=True
+)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +29,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-2k8svw_k2ylfsr##^cjh9^33m=_v+s%c&&3ge149i&&-spx+-8"
+# SECRET_KEY = "django-insecure-2k8svw_k2ylfsr##^cjh9^33m=_v+s%c&&3ge149i&&-spx+-8"
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1","chinmay.pythonanywhere.com"]
+ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['your-app-name.onrender.com']
 
 
 # Application definition
@@ -39,10 +52,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "order",
     "canteen",
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
